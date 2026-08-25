@@ -2,65 +2,94 @@
 
 set -euo pipefail
 
-SRC_KBITX="./XF_J24.kbitx"
-SRC_SFDIR="./XF_Nstf.sfdir"
-OUT_DIR="fonts"
+# 1. Setting Property
+FONT_FAMILY="XF_J24"
+FONT_NAME="XF_J24-Regular"     # PostScript Name
+FONT_STYLE="Regular"           # Style Name
+VERSION="1.0.0-beta.1"         # Release Version
+FONT_VER_NUM="0.900"           # Internal Version (Numeric)
 
+SRC_KBITX="./XF_J24.kbitx"
+OUT_DIR="fonts"
+BASE_TTF="${OUT_DIR}/XF_J24_base.ttf"
+
+IS_RELEASE="false"
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -r|--release)
+      IS_RELEASE="true"
+      shift
+      ;;
+    *)
+      echo "Unknown option: $1"
+      exit 1
+      ;;
+  esac
+done
+
+# 2. Build Command
 mkdir -p "${OUT_DIR}"
 
-echo "🔨 Building fonts from ${SRC_KBITX}..."
+echo "Building base bitmap TTF from ${SRC_KBITX}..."
+rm "${BASE_TTF}"
+java -jar /Applications/BitsNPicas.jar convertbitmap -o "${BASE_TTF}" -f ttf "${SRC_KBITX}"
 
-java -jar /Applications/BitsNPicas.jar convertbitmap -o "${OUT_DIR}/XF_J24_base.ttf" -f ttf "${SRC_KBITX}"
+echo "Processing font with FontForge..."
 
-echo "🔨 Building fonts from ${SRC_SFDIR}..."
-
-fontforge -lang=py -c "
+fontforge -lang=py -script - \
+  "${BASE_TTF}" \
+  "${OUT_DIR}" \
+  "${FONT_NAME}" \
+  "${FONT_FAMILY}" \
+  "${FONT_STYLE}" \
+  "${VERSION}" \
+  "${FONT_VER_NUM}" \
+  "${IS_RELEASE}" <<'EOF'
 import fontforge, sys
 
-sfdir_path = sys.argv[1]
-out_dir = sys.argv[2]
+# args
+base_ttf_path = sys.argv[1]
+out_dir       = sys.argv[2]
+font_name     = sys.argv[3]
+font_family   = sys.argv[4]
+font_style    = sys.argv[5]
+version_str   = sys.argv[6]
+ver_num       = sys.argv[7]
+is_release    = sys.argv[8] == "true"
 
-print('  -> Loading ttf...')
-font = fontforge.open(sfdir_path)
+full_name = f"{font_family} {font_style}"
 
-print('  -> Generating OTF...')
-font.generate(f'{out_dir}/XF_J24.otf')
+print(f"  -> Loading base font from {base_ttf_path}...")
+font = fontforge.open(base_ttf_path)
 
-print('  -> Generating TTF...')
-font.generate(f'{out_dir}/XF_J24.ttf')
+# metadata
+font.fontname   = font_name
+font.familyname = font_family
+font.fullname   = full_name
+font.version    = ver_num
 
-print('  -> Generating WOFF2...')
-font.generate(f'{out_dir}/XF_J24.woff2')
+# OpenType Name Table
+font.appendSFNTName('English (US)', 'Family', font_family)
+font.appendSFNTName('English (US)', 'SubFamily', font_style)
+font.appendSFNTName('English (US)', 'Fullname', full_name)
+font.appendSFNTName('English (US)', 'Version', f'Version {version_str}')
+
+# --- export ---
+if is_release:
+    file_prefix = f"{out_dir}/{font_name}-{version_str}"
+else:
+    file_prefix = f"{out_dir}/{font_name}"
+
+print(f"  -> Generating OTF: {file_prefix}.otf")
+font.generate(f"{file_prefix}.otf")
+
+print(f"  -> Generating TTF: {file_prefix}.ttf")
+font.generate(f"{file_prefix}.ttf")
+
+print(f"  -> Generating WOFF2: {file_prefix}.woff2")
+font.generate(f"{file_prefix}.woff2")
 
 font.close()
-
-print('  -> Scaling to 26px equivalent...')
-font_26 = fontforge.open(sfdir_path)
-scale_factor = 24.0 / 26.0
-em = font_26.em
-for g in font_26.glyphs():
-    if g.unicode >= 0 or g.glyphname:
-        orig_width = g.width
-        offset_x = (orig_width * (1.0 - scale_factor)) / 2.0
-        offset_y = (em * (1.0 - scale_factor)) / 2.0
-
-        mat = psMat.compose(psMat.scale(scale_factor), psMat.translate(offset_x, offset_y))
-        g.transform(mat)
-
-        g.round()
-
-        g.width = orig_width
-
-font_26.familyname = font_26.familyname + '_26'
-font_26.fontname = font_26.fontname + '_26'
-font_26.fullname = font_26.fullname + '_26'
-
-print('  -> Generating 26px Padded (.otf, .ttf)...')
-font_26.generate(f'{out_dir}/XF_J24_26.otf')
-font_26.generate(f'{out_dir}/XF_J24_26.ttf')
-font_26.generate(f'{out_dir}/XF_J24_26.woff2')
-font_26.close()
-
-" "${OUT_DIR}/XF_J24_base.ttf" "${OUT_DIR}"
+EOF
 
 echo "Build complete! Output files are in ${OUT_DIR}/"
