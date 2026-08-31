@@ -108,7 +108,7 @@ def main():
     if not os.path.exists(out_dir):
         os.makedirs(out_dir)
 
-    print(f"📖 Parsing BDF file: {bdf_path}...")
+    print(f"Parsing BDF file: {bdf_path}...")
     bdf_data = parse_bdf(bdf_path)
     print(f"  -> Found {len(bdf_data)} glyphs.")
 
@@ -125,7 +125,7 @@ def main():
     px_unit = EM_SIZE / float(GRID_SIZE)  # 1px ≒ 41.667 units
     radius = (px_unit * DOT_SCALE) / 2.0
 
-    print("🎨 Generating vector dots...")
+    print("Generating vector dots...")
     for unicode_val, data in bdf_data.items():
         if unicode_val < 0:
             continue
@@ -169,14 +169,14 @@ def main():
     otf_path = os.path.join(out_dir, f"{FONT_NAME}.otf")
     ttf_path = os.path.join(out_dir, f"{FONT_NAME}.ttf")
 
-    print(f"💾 Exporting {otf_path}...")
+    print(f"Exporting {otf_path}...")
     font.generate(otf_path)
 
-    print(f"💾 Exporting {ttf_path}...")
+    print(f"Exporting {ttf_path}...")
     font.generate(ttf_path)
 
     font.close()
-    print("✨ Build complete!")
+    print("Build complete!")
 
 if __name__ == "__main__":
     main()

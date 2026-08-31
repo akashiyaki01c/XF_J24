@@ -6,7 +6,7 @@ OUT_DIR="fonts"
 
 mkdir -p "${OUT_DIR}"
 
-echo "🔨 Building fonts from ${SRC_KBITX}..."
+echo "Building fonts from ${SRC_KBITX}..."
 
 java -jar /Applications/BitsNPicas.jar convertbitmap -o "${OUT_DIR}/XF_J24_base.bdf" -f bdf "${SRC_KBITX}"
 
