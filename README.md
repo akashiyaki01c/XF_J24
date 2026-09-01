@@ -17,6 +17,14 @@ This font includes the JIS Level 1 and JIS level-2 kanji sets.
 This font is licensed under the [SIL Open Font License 1.1](LICENSE).
 Feel free to use it for personal or commercial projects.
 
+### Upstream Credits & Licenses
+
+XF_J24 builds upon and incorporates designs from the following open-source projects:
+
+- **[JF Dot Jiskan24 (only Full-width glyphs)](http://jikasei.me/font/jf-dotfont/)**: Public Domain
+- **[Source Han Sans](https://github.com/adobe-fonts/source-han-sans)**: Licensed under [SIL Open Font License 1.1](https://scripts.sil.org/OFL) (© 2014-2021 Adobe)
+- **[Inter](https://github.com/rsms/inter)**: Licensed under [SIL Open Font License 1.1](https://scripts.sil.org/OFL) (© 2016-2020 Rasmus Andersson)
+
 ## Repository Structure
 
 - `XF_J24.kbitx`: Bits'N'Picas source file
