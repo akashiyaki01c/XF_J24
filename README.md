@@ -1,7 +1,8 @@
 # XF_J24
 
-{: align="center"}
+<div style="text-align: center;">
 ![XF_J24 Font Sample](docs/24dot.svg)
+</div>
 
 XF_J24 is a 24px bitmap-style Gothic font based on [JF Dot Jiskan24 (Public Domain)](http://jikasei.me/font/jf-dotfont/). (Excluding half-width characters)
 
