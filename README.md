@@ -6,6 +6,13 @@ XF_J24 is a 24px bitmap-style Gothic font based on [JF Dot Jiskan24 (Public Doma
 
 Glyphs not included in Jiskan24 are complemented with designs based on [Source Han Sans (OFL 1.1)](https://github.com/adobe-fonts/source-han-sans) and [Inter (OFL 1.1)](https://github.com/rsms/inter).
 
+## Download / Installation
+
+You can download the pre-compiled font files (`.otf`, `.ttf`, `.woff2`) from the [Releases](https://github.com/akashiyaki01c/XF_J24/releases) page.
+
+1. Go to [Releases](https://github.com/akashiyaki01c/XF_J24/releases/latest) and download the latest font files.
+2. Install the `.ttf` or `.otf` file on your OS. (or use `.woff2` in your `@font-face` CSS rules.)
+
 ## Included glyphs
 
 This font includes the JIS Level 1 and JIS level-2 kanji sets.
