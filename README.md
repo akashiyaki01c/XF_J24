@@ -1,6 +1,6 @@
 # XF_J24
 
-![XF_J24 Font Sample](example.png)
+![XF_J24 Font Sample](docs/24dot.svg)
 
 XF_J24 is a 24px bitmap-style Gothic font based on [JF Dot Jiskan24 (Public Domain)](http://jikasei.me/font/jf-dotfont/). (Excluding half-width characters)
 
