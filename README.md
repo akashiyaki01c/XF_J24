@@ -1,14 +1,16 @@
 # XF_J24
 
-![font example](example.png)
+![XF_J24 Font Sample](example.png)
 
-XF_J24 is a 24px bitmap-style Gothic font based on jiskan24.
+XF_J24 is a 24px bitmap-style Gothic font based on [JF Dot Jiskan24 (Public Domain)](http://jikasei.me/font/jf-dotfont/). (Excluding half-width characters)
+
+Glyphs not included in Jiskan24 are complemented with designs based on [Source Han Sans (OFL 1.1)](https://github.com/adobe-fonts/source-han-sans) and [Inter (OFL 1.1)](https://github.com/rsms/inter).
 
 ## Included glyphs
 
-This font is included JIS level-1 kanji set and JIS level-2 kanji set.
+This font includes the JIS Level 1 and JIS level-2 kanji sets.
 
-> **Note:** Some glyphs are still undergoing manual design adjustments/modifications.
+> **Note:** Some glyphs are still undergoing manual design adjustments and modifications.
 
 ## License
 
@@ -17,7 +19,7 @@ Feel free to use it for personal or commercial projects.
 
 ## Repository Structure
 
-- `XF_J24.kbitx`: Bits'N'Picas soure file
+- `XF_J24.kbitx`: Bits'N'Picas source file
 - `fonts/`: Compiled font files (`.otf`, `.ttf`, `.woff2`)
 
 ## Development / Building from Source
