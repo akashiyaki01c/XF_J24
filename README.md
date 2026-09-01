@@ -1,5 +1,8 @@
 # XF_J24
 
+[![License: OFL-1.1](https://img.shields.io/badge/License-OFL_1.1-blue.svg)](LICENSE)
+[![Format](https://img.shields.io/badge/Format-OTF%20%7C%20TTF%20%7C%20WOFF2%20%7C%20BDF-brightgreen)](#)
+
 <p align="center">
 <img src="docs/24dot.svg" alt="XF_J24 Font Sample">
 </p>
