@@ -12,6 +12,7 @@ FONT_VER_NUM="0.900"           # Internal Version (Numeric)
 SRC_KBITX="./XF_J24.kbitx"
 OUT_DIR="fonts"
 BASE_TTF="${OUT_DIR}/XF_J24_base.ttf"
+BASE_BDF="${OUT_DIR}/XF_J24_base.bdf"
 
 IS_RELEASE="false"
 while [[ $# -gt 0 ]]; do
@@ -31,7 +32,7 @@ done
 mkdir -p "${OUT_DIR}"
 
 echo "Building base bitmap TTF from ${SRC_KBITX}..."
-rm "${BASE_TTF}"
+rm -f "${BASE_TTF}"
 java -jar /Applications/BitsNPicas.jar convertbitmap -o "${BASE_TTF}" -f ttf "${SRC_KBITX}"
 
 echo "Processing font with FontForge..."
@@ -88,6 +89,13 @@ font.generate(f"{file_prefix}.ttf")
 
 print(f"  -> Generating WOFF2: {file_prefix}.woff2")
 font.generate(f"{file_prefix}.woff2")
+
+
+font.bitmapSizes = (24,)
+font.selection.all()
+font.regenBitmaps(24)
+print(f"  -> Generating BDF: {file_prefix}.bdf")
+font.generate(f"{file_prefix}.bdf", bitmap_type='bdf')
 
 font.close()
 EOF
