@@ -1,6 +1,6 @@
 # XF_J24
 
-<p style="text-align: center;">
+<p align="center">
 <img src="docs/24dot.svg" alt="XF_J24 Font Sample">
 </p>
 
