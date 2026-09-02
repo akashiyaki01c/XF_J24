@@ -75,6 +75,8 @@ font.appendSFNTName('English (US)', 'SubFamily', font_style)
 font.appendSFNTName('English (US)', 'Fullname', full_name)
 font.appendSFNTName('English (US)', 'Version', f'Version {version_str}')
 
+font.os2_version = 0
+
 # --- export ---
 if is_release:
     file_prefix = f"{out_dir}/{font_name}-{version_str}"
