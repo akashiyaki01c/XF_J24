@@ -1,3 +1,5 @@
+English | [日本語](./README-JP.md)
+
 # XF_J24
 
 [![License: OFL-1.1](https://img.shields.io/badge/License-OFL_1.1-blue.svg)](LICENSE)
